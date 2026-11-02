@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+@import './styles/tokens.css';
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg-base text-text-primary font-body antialiased m-0;
+    background-image: radial-gradient(
+      120% 120% at 10% 0%,
+      var(--color-bg-gradient-start) 0%,
+      var(--color-bg-gradient-end) 45%,
+      var(--color-bg-base) 100%
+    );
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  /* Visible focus state on every interactive element, in both themes. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Graph-theme canvas surfaces get a graph-paper grid background. */
+  .graph-grid-bg {
+    background-color: var(--color-graph-bg);
+    background-image:
+      linear-gradient(var(--color-graph-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-graph-grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Reduced-motion: disable non-essential animation platform-wide. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

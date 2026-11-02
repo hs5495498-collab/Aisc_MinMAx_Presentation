@@ -59,13 +59,24 @@ dashboard theme) across every page in the navigation map.
 `docs/COMPONENT_INVENTORY.md`, `docs/DESIGN_DECISIONS.md`. No
 application code, components, or dependencies were introduced.
 
-## Phase 3 — React Frontend Foundation
+## Phase 3 — React Frontend Foundation *(completed)*
 Scaffold the React + Vite + Tailwind CSS + Framer Motion application
 shell with routing matching the navigation map, but no game logic.
 
 **Acceptance criteria:**
-- App builds and runs with empty/placeholder pages for every route.
-- Shared layout, navigation, and theme providers in place.
+- App builds and runs with empty/placeholder pages for every route. —
+  Met: all 14 routes implemented with distinct, wireframe-matched
+  layouts (not empty placeholders); `npm run build` (strict `tsc -b` +
+  `vite build`) passes with zero errors.
+- Shared layout, navigation, and theme providers in place. — Met:
+  `AppShell`/`PageContainer`/`Sidebar`/`MobileTabBar`/`Topbar` plus the
+  token-driven Dashboard/Graph theme system in `frontend/src/styles/tokens.css`.
+
+**Implementation details:** see `frontend/README.md` and
+`docs/FRONTEND_ARCHITECTURE.md`. No Minimax, Alpha-Beta, RPS strategy
+engine, or backend code was introduced — Tic-Tac-Toe and Rock Paper
+Scissors use a clearly-labeled random demo opponent only, and all
+sample statistics/history are labeled as demo data.
 
 ## Phase 4 — Tic-Tac-Toe Game Engine
 Implement pure-Python Tic-Tac-Toe rules: board state, move validation,

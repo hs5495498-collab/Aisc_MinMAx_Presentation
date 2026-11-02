@@ -1,0 +1,48 @@
+/*
+ * Design tokens implementing docs/UI_UX_DESIGN.md §1 exactly.
+ * Tailwind v4 auto-generates utilities (bg-*, text-*, border-*, etc.)
+ * from every --color-* variable declared in @theme.
+ */
+@theme {
+  /* Dashboard Theme (Reference B) */
+  --color-bg-base: #130a21;
+  --color-bg-gradient-start: #1a0b2e;
+  --color-bg-gradient-end: #2d1b4e;
+  --color-surface-card: rgba(255, 255, 255, 0.05);
+  --color-surface-card-border: rgba(255, 255, 255, 0.08);
+  --color-accent-violet: #8b5cf6;
+  --color-accent-magenta: #d946ef;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-teal: #2dd4bf;
+  --color-state-success: #34d399;
+  --color-state-warning: #fbbf24;
+  --color-state-error: #f87171;
+  --color-text-primary: #f5f3ff;
+  --color-text-secondary: #c4b5fd;
+  --color-text-tertiary: #8b7fb0;
+
+  /* Graph Theme (Reference A) */
+  --color-graph-bg: #05060c;
+  --color-graph-grid: #11142a;
+  --color-graph-node-max: #22d3ee;
+  --color-graph-node-min: #a855f7;
+  --color-graph-node-unexplored: #3f3f56;
+  --color-graph-node-pruned: #374151;
+  --color-graph-edge-default: #2a2d3a;
+  --color-graph-amber-pulse: #facc15;
+
+  /* Typography */
+  --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Shadows / glow */
+  --shadow-card: 0 8px 32px rgba(139, 92, 246, 0.15);
+}
