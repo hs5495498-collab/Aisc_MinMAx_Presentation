@@ -20,7 +20,20 @@ competition:
 Neither game has been implemented yet. This repository currently
 contains architecture, UI/UX design, and planning documentation only.
 
-**Status: Phase 7 — Search-Tree Visualization complete.** The Minimax
+**Status: Phase 8 — RPS Strategy Engine complete.** A pure-Python,
+game-theory-only engine (`backend/app/games/rock_paper_scissors/`) now
+implements standard Rock Paper Scissors's payoff matrix, mixed
+strategies, expected payoff, best response, Nash equilibrium (derived
+from a symmetry argument, with an exact-rational proof via
+`fractions.Fraction`, not a hardcoded constant), and exploitability.
+Standard RPS is simultaneous-action and zero-sum — this engine never
+uses Minimax/Alpha-Beta or any alternating-turn search; see
+[docs/RPS_STRATEGY_ENGINE.md](./docs/RPS_STRATEGY_ENGINE.md) and
+[docs/GAME_THEORY_DESIGN.md](./docs/GAME_THEORY_DESIGN.md). No
+gameplay session, match logic, or AI opponent selection exists yet
+(Phase 9).
+
+**Phase 7 — Search-Tree Visualization complete.** The Minimax
 Explorer, Alpha-Beta Explorer, and Search Tree Lab pages now replay
 *real* recorded searches — step through actual MAX/MIN value backup,
 alpha/beta updates, and Alpha-Beta cutoffs event-by-event, with
@@ -77,6 +90,7 @@ variant that *is*.
 | [docs/SEARCH_VISUALIZATION_DESIGN.md](./docs/SEARCH_VISUALIZATION_DESIGN.md) | Search-event schema and tree visualization |
 | [docs/ROCK_PAPER_SCISSORS_DESIGN.md](./docs/ROCK_PAPER_SCISSORS_DESIGN.md) | RPS gameplay, strategies, data model |
 | [docs/GAME_THEORY_DESIGN.md](./docs/GAME_THEORY_DESIGN.md) | Payoff matrix, Nash equilibrium, exploitability |
+| [docs/RPS_STRATEGY_ENGINE.md](./docs/RPS_STRATEGY_ENGINE.md) | As-built RPS engine: mixed strategies, equilibrium derivation, exploitability |
 | [docs/API_SPECIFICATION.md](./docs/API_SPECIFICATION.md) | FastAPI REST contract for both games |
 | [docs/UI_UX_DESIGN.md](./docs/UI_UX_DESIGN.md) | Master design system: tokens, navigation, dual visual theme |
 | [docs/PAGE_WIREFRAMES.md](./docs/PAGE_WIREFRAMES.md) | Wireframes and layout hierarchy for all 14 pages |

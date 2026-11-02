@@ -170,15 +170,32 @@ since no backend API exists yet; the empty board's 549,946-node tree
 is intentionally not shipped as a bundled fixture (see the doc's
 "Known Limitations").
 
-## Phase 8 — RPS Strategy Engine
-Implement the RPS payoff matrix, round resolution, best-of-N match
-logic, and AI strategy selection (including the uniform mixed-strategy
-equilibrium strategy).
+## Phase 8 — RPS Strategy Engine *(completed, scope corrected)*
+Implement the RPS payoff matrix, round resolution, and the
+mathematical strategy engine (mixed strategies, expected payoff, best
+response, Nash equilibrium, exploitability).
 
-**Acceptance criteria:**
-- Round resolution is correct for all 9 choice combinations.
-- Best-of-3/5/10 match completion logic is correct.
-- Default AI strategy plays each option with probability 1/3.
+**Note on scope:** the detailed Phase 8 instructions actually received
+scoped this phase to the **pure mathematical engine only** — best-of-N
+match logic and AI strategy *selection* for gameplay (as opposed to the
+math each strategy is built on) are explicitly Phase 9's responsibility,
+not this phase's. This corrects this document's earlier Phase 1A
+framing, which bundled them together before Phase 8's actual
+acceptance criteria were specified.
+
+**Acceptance criteria (as actually specified for this phase):**
+- Round resolution is correct for all 9 choice combinations. — Met:
+  `payoff.py::resolve_round`, tested exhaustively.
+- Default (Nash) strategy plays each option with probability 1/3. —
+  Met: `equilibrium.py::derive_uniform_equilibrium()` *derives* this
+  from a symmetry argument (not a hardcoded constant) and
+  `exact_game_value_at_uniform()` proves the game value is exactly 0
+  using exact rational arithmetic.
+
+**Implementation details:** see `docs/RPS_STRATEGY_ENGINE.md`. No
+gameplay session, best-of-N match logic, FastAPI, or frontend changes
+were introduced — pure game-theory math only. 267/267 backend tests
+pass (176 prior + 91 new).
 
 ## Phase 9 — RPS Interactive Gameplay
 Build human vs. AI and human vs. human RPS gameplay pages with
