@@ -147,13 +147,28 @@ and `docs/ALGORITHM_COMPARISON.md`. Neither the Phase 5 Minimax module
 nor the Phase 4 game engine was modified. 149/149 backend tests pass
 (56 engine + 27 Minimax + 48 Alpha-Beta + 18 comparison/benchmark).
 
-## Phase 7 — Tic-Tac-Toe Search-Tree Visualization
+## Phase 7 — Tic-Tac-Toe Search-Tree Visualization *(completed)*
 Build the interactive recursive search-tree view (MAX/MIN evaluation,
 alpha/beta updates, pruning explanations) using the graph theme.
 
 **Acceptance criteria:**
 - Every explored node and every pruned branch is represented in the
-  visualization, with zoom/pan and node inspection.
+  visualization, with zoom/pan and node inspection. — Met: a
+  `TreeBuildingObserver` adapter converts real Minimax/Alpha-Beta
+  observer events into a replayable tree (no fabricated nodes/values);
+  pruned branches render as stubs with no board/evaluation/children,
+  never implying they were evaluated; pan/zoom and a node inspector
+  with human-readable explanations are implemented and tested.
+
+**Implementation details:** see `docs/SEARCH_TREE_VISUALIZATION.md`.
+No FastAPI, RPS, or engine/Minimax/Alpha-Beta algorithm changes were
+introduced — the visualization adapter only observes existing solver
+events. 176/176 backend tests pass (149 prior + 27 new); 43/43
+frontend tests pass. Real search data for the shipped demo positions
+is pre-generated offline (`backend/scripts/generate_visualization_fixtures.py`)
+since no backend API exists yet; the empty board's 549,946-node tree
+is intentionally not shipped as a bundled fixture (see the doc's
+"Known Limitations").
 
 ## Phase 8 — RPS Strategy Engine
 Implement the RPS payoff matrix, round resolution, best-of-N match

@@ -1,0 +1,42 @@
+[
+  {
+    "fixture": "immediate-win",
+    "algorithm": "minimax",
+    "label": "Immediate win available",
+    "sizeTier": "small",
+    "nodeCount": 157,
+    "eventCount": 544,
+    "nodesVisited": 157,
+    "file": "immediate-win-minimax.json"
+  },
+  {
+    "fixture": "immediate-win",
+    "algorithm": "alpha_beta",
+    "label": "Immediate win available",
+    "sizeTier": "small",
+    "nodeCount": 60,
+    "eventCount": 177,
+    "nodesVisited": 36,
+    "file": "immediate-win-alpha_beta.json"
+  },
+  {
+    "fixture": "must-block",
+    "algorithm": "minimax",
+    "label": "Must block opponent win",
+    "sizeTier": "large",
+    "nodeCount": 1019,
+    "eventCount": 3530,
+    "nodesVisited": 1019,
+    "file": "must-block-minimax.json"
+  },
+  {
+    "fixture": "must-block",
+    "algorithm": "alpha_beta",
+    "label": "Must block opponent win",
+    "sizeTier": "large",
+    "nodeCount": 128,
+    "eventCount": 401,
+    "nodesVisited": 82,
+    "file": "must-block-alpha_beta.json"
+  }
+]

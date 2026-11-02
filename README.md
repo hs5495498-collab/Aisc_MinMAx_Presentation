@@ -20,18 +20,25 @@ competition:
 Neither game has been implemented yet. This repository currently
 contains architecture, UI/UX design, and planning documentation only.
 
-**Status: Phase 6 — Alpha-Beta Implementation complete.** A standard
-Alpha-Beta Pruning search (`backend/app/algorithms/alpha_beta/`) now
-runs alongside Phase 5's unpruned Minimax baseline on the Phase 4
-engine, sharing the exact same evaluator, move ordering, and
-validation rules. On the empty board it visits 20,866 nodes versus
-Minimax's 549,946 (96.21% fewer) while returning the identical
-evaluation and best move — full benchmark in
-[docs/ALGORITHM_COMPARISON.md](./docs/ALGORITHM_COMPARISON.md). Both
-algorithms are independently verified to never lose as either X or O.
-The Phase 3 frontend (`frontend/`) still uses its own clearly-labeled
-random demo opponent; nothing is wired together yet (no FastAPI layer
-exists). See
+**Status: Phase 7 — Search-Tree Visualization complete.** The Minimax
+Explorer, Alpha-Beta Explorer, and Search Tree Lab pages now replay
+*real* recorded searches — step through actual MAX/MIN value backup,
+alpha/beta updates, and Alpha-Beta cutoffs event-by-event, with
+play/pause/speed controls, node inspection, and a side-by-side
+Minimax-vs-Alpha-Beta comparison. No search tree is fabricated: a
+backend adapter (`backend/app/algorithms/visualization/`) converts the
+real Phase 5/6 solver observer events into replayable data, generated
+offline into static fixtures (no FastAPI layer exists yet). See
+[docs/SEARCH_TREE_VISUALIZATION.md](./docs/SEARCH_TREE_VISUALIZATION.md).
+Phase 6's Alpha-Beta Pruning search (`backend/app/algorithms/alpha_beta/`)
+still runs alongside Phase 5's unpruned Minimax baseline, sharing the
+exact same evaluator, move ordering, and validation rules — on the
+empty board it visits 20,866 nodes versus Minimax's 549,946 (96.21%
+fewer) while returning the identical evaluation and best move; full
+benchmark in [docs/ALGORITHM_COMPARISON.md](./docs/ALGORITHM_COMPARISON.md).
+The Phase 3 game pages (`frontend/`) still use their own
+clearly-labeled random demo opponent; the real algorithms are not
+wired into actual gameplay yet. See
 [docs/ALPHA_BETA_IMPLEMENTATION.md](./docs/ALPHA_BETA_IMPLEMENTATION.md),
 [docs/MINIMAX_IMPLEMENTATION.md](./docs/MINIMAX_IMPLEMENTATION.md), and
 [docs/TIC_TAC_TOE_ENGINE.md](./docs/TIC_TAC_TOE_ENGINE.md) for the
@@ -83,6 +90,7 @@ variant that *is*.
 | [docs/MINIMAX_IMPLEMENTATION.md](./docs/MINIMAX_IMPLEMENTATION.md) | As-built Minimax: theory, scoring, statistics, exhaustive verification |
 | [docs/ALPHA_BETA_IMPLEMENTATION.md](./docs/ALPHA_BETA_IMPLEMENTATION.md) | As-built Alpha-Beta: pruning conditions, statistics, observer events |
 | [docs/ALGORITHM_COMPARISON.md](./docs/ALGORITHM_COMPARISON.md) | Minimax vs. Alpha-Beta benchmark results and methodology |
+| [docs/SEARCH_TREE_VISUALIZATION.md](./docs/SEARCH_TREE_VISUALIZATION.md) | Search-tree visualization: event flow, playback, performance strategy |
 
 ## Navigation Map (Planned)
 
