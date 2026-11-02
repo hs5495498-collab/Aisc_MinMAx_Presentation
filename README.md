@@ -20,15 +20,22 @@ competition:
 Neither game has been implemented yet. This repository currently
 contains architecture, UI/UX design, and planning documentation only.
 
-**Status: Phase 4 — Tic-Tac-Toe Game Engine complete.** A pure-Python,
-rules-only Tic-Tac-Toe engine now exists in `backend/` (board state,
-move validation, win/draw detection, history, undo/restart — no AI,
-no HTTP, no database yet). The Phase 3 frontend
-(`frontend/`) still uses its own clearly-labeled random demo opponent;
-the two are not yet wired together. See
-[backend/README.md](./backend/README.md) and
+**Status: Phase 6 — Alpha-Beta Implementation complete.** A standard
+Alpha-Beta Pruning search (`backend/app/algorithms/alpha_beta/`) now
+runs alongside Phase 5's unpruned Minimax baseline on the Phase 4
+engine, sharing the exact same evaluator, move ordering, and
+validation rules. On the empty board it visits 20,866 nodes versus
+Minimax's 549,946 (96.21% fewer) while returning the identical
+evaluation and best move — full benchmark in
+[docs/ALGORITHM_COMPARISON.md](./docs/ALGORITHM_COMPARISON.md). Both
+algorithms are independently verified to never lose as either X or O.
+The Phase 3 frontend (`frontend/`) still uses its own clearly-labeled
+random demo opponent; nothing is wired together yet (no FastAPI layer
+exists). See
+[docs/ALPHA_BETA_IMPLEMENTATION.md](./docs/ALPHA_BETA_IMPLEMENTATION.md),
+[docs/MINIMAX_IMPLEMENTATION.md](./docs/MINIMAX_IMPLEMENTATION.md), and
 [docs/TIC_TAC_TOE_ENGINE.md](./docs/TIC_TAC_TOE_ENGINE.md) for the
-engine, [frontend/README.md](./frontend/README.md) and
+backend, [frontend/README.md](./frontend/README.md) and
 [docs/FRONTEND_ARCHITECTURE.md](./docs/FRONTEND_ARCHITECTURE.md) for
 the frontend, and [PROJECT_PLAN.md](./PROJECT_PLAN.md) for the roadmap.
 
@@ -73,6 +80,9 @@ variant that *is*.
 | [docs/TESTING_STRATEGY.md](./docs/TESTING_STRATEGY.md) | Pytest / Vitest coverage plan |
 | [docs/FRONTEND_ARCHITECTURE.md](./docs/FRONTEND_ARCHITECTURE.md) | As-built frontend structure, dependencies, and theme implementation |
 | [docs/TIC_TAC_TOE_ENGINE.md](./docs/TIC_TAC_TOE_ENGINE.md) | As-built Tic-Tac-Toe engine: state model, rules, exceptions, testing |
+| [docs/MINIMAX_IMPLEMENTATION.md](./docs/MINIMAX_IMPLEMENTATION.md) | As-built Minimax: theory, scoring, statistics, exhaustive verification |
+| [docs/ALPHA_BETA_IMPLEMENTATION.md](./docs/ALPHA_BETA_IMPLEMENTATION.md) | As-built Alpha-Beta: pruning conditions, statistics, observer events |
+| [docs/ALGORITHM_COMPARISON.md](./docs/ALGORITHM_COMPARISON.md) | Minimax vs. Alpha-Beta benchmark results and methodology |
 
 ## Navigation Map (Planned)
 

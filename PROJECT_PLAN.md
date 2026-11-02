@@ -95,21 +95,57 @@ win/draw detection, move history, undo/restart.
 database code was introduced — pure rules only, importable directly
 from Python (`from app.games.tic_tac_toe import TicTacToeGame`).
 
-## Phase 5 — Minimax Implementation
+## Phase 5 — Minimax Implementation *(completed)*
 Implement baseline Minimax search for Tic-Tac-Toe.
 
 **Acceptance criteria:**
-- Minimax never loses as the AI player from any reachable state.
-- Node-visit count is recorded per decision.
+- Minimax never loses as the AI player from any reachable state. —
+  Met: exhaustive verification (branching over every opponent move at
+  every opponent turn, for both AI=X and AI=O) found zero losses; a
+  separate Minimax-vs-Minimax self-play game ends in a draw, as
+  expected.
+- Node-visit count is recorded per decision. — Met: `MinimaxResult`
+  carries `nodes_visited`, `terminal_nodes`, `leaves_evaluated`,
+  `moves_considered`, `maximum_search_depth`, `execution_time_ms`.
+  A search from the empty board visits exactly 549,946 nodes / 255,168
+  terminal leaves — the independently-known totals for the full
+  Tic-Tac-Toe game tree.
 
-## Phase 6 — Alpha-Beta Implementation
-Implement ordered and unordered Alpha-Beta Pruning variants.
+**Implementation details:** see `docs/MINIMAX_IMPLEMENTATION.md`. No
+Alpha-Beta Pruning, FastAPI, or frontend changes were introduced.
+83/83 backend tests pass (56 engine + 27 Minimax).
 
-**Acceptance criteria:**
-- Both variants produce the same move choice as Minimax on identical
-  inputs, with fewer or equal nodes explored.
-- Ordered variant explores fewer nodes than unordered on average,
-  verified by instrumentation.
+## Phase 6 — Alpha-Beta Implementation *(completed, baseline scope)*
+Implement standard Alpha-Beta Pruning as a fair, same-move-ordering
+baseline against Minimax, with detailed pruning statistics and a
+comparison utility.
+
+**Note on scope:** the detailed Phase 6 instructions actually received
+for this phase explicitly scoped it to **one baseline implementation**
+using identical row-major ordering to Minimax (so the Phase 5/6
+comparison isolates pruning alone), and asked that any heuristic
+move-ordering variant be a separate, clearly-labeled, disabled-by-default
+experimental mode — not built in this phase. This supersedes this
+document's earlier "ordered and unordered variants" framing from
+Phase 1A, before Phase 6's actual acceptance criteria were specified.
+
+**Acceptance criteria (as actually specified for this phase):**
+- Alpha-Beta produces the same move choice as Minimax on identical
+  inputs, with fewer or equal nodes explored. — Met: verified on the
+  required 7-position benchmark plus 10 additional sampled positions;
+  evaluations matched on every position tested, best moves matched on
+  every position tested, and `alpha_beta_nodes_visited <= minimax_nodes_visited`
+  held on every position (with equality, not reduction, on the
+  1-legal-move late-game position, where there is nothing to prune).
+- Pruning is instrumented with precise, internally-consistent
+  statistics. — Met: `alpha_beta_cutoffs` and `branches_pruned` are
+  tracked as distinct counts and verified, via an observer, to match
+  the literal number of real cutoff/pruning events that occurred.
+
+**Implementation details:** see `docs/ALPHA_BETA_IMPLEMENTATION.md`
+and `docs/ALGORITHM_COMPARISON.md`. Neither the Phase 5 Minimax module
+nor the Phase 4 game engine was modified. 149/149 backend tests pass
+(56 engine + 27 Minimax + 48 Alpha-Beta + 18 comparison/benchmark).
 
 ## Phase 7 — Tic-Tac-Toe Search-Tree Visualization
 Build the interactive recursive search-tree view (MAX/MIN evaluation,
