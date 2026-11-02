@@ -197,13 +197,42 @@ gameplay session, best-of-N match logic, FastAPI, or frontend changes
 were introduced — pure game-theory math only. 267/267 backend tests
 pass (176 prior + 91 new).
 
-## Phase 9 — RPS Interactive Gameplay
+## Phase 9 — RPS Interactive Gameplay *(completed, scope corrected)*
 Build human vs. AI and human vs. human RPS gameplay pages with
 scoreboard and match history, using the dashboard theme.
 
-**Acceptance criteria:**
-- Full best-of-N match playable end-to-end for both modes.
-- Match history and scoreboard persist for the duration of a session.
+**Note on scope:** the detailed Phase 9 instructions actually received
+scoped this phase to **human-vs-AI gameplay only**, with four selectable
+AI strategies (Nash/uniform, random, custom mixed, biased
+demonstration) and a structurally-enforced simultaneous-action
+fairness guarantee. Human-vs-human play, the payoff-matrix view, and
+the mixed-strategy probability visualization are explicitly Phase
+10's responsibility, not this phase's — this corrects this document's
+earlier Phase 1A framing, which bundled them together before Phase 9's
+actual acceptance criteria were specified (the same kind of correction
+already made for Phase 8).
+
+**Acceptance criteria (as actually specified for this phase):**
+- Full best-of-N match playable end-to-end against the AI, for
+  best-of-3/5/7 and a validated custom length. — Met: `RPSMatch` /
+  `RPSMatchEngine` (`match.py` / `rpsEngine.ts`), wired into
+  `RockPaperScissorsPage.tsx`.
+- Match history and scoreboard persist for the duration of a session
+  (i.e. for the lifetime of the page/match object — no backend
+  persistence exists yet). — Met: `useRpsMatch`'s React state, backed
+  by the engine's immutable `history`/`score`.
+- The AI's action for the current round is never exposed before the
+  player's move is locked. — Met: the two-method
+  `lockPlayerMove()`/`resolvePendingRound()` (`lock_player_move()`/
+  `resolve_pending_round()`) API structurally enforces this; see
+  `docs/RPS_GAMEPLAY.md` §1.
+
+**Implementation details:** see `docs/RPS_GAMEPLAY.md`. No FastAPI,
+database, authentication, human-vs-human mode, payoff-matrix
+dashboard, strategy-probability visualization, or Phase 10+
+functionality was introduced; Phase 8's math engine
+(`docs/RPS_STRATEGY_ENGINE.md`) is reused unchanged. 332/332 backend
+tests pass (267 prior + 65 new); 82/82 frontend tests pass.
 
 ## Phase 10 — RPS Strategy Visualization
 Build the payoff-matrix view and mixed-strategy/probability
