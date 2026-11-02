@@ -234,13 +234,46 @@ functionality was introduced; Phase 8's math engine
 (`docs/RPS_STRATEGY_ENGINE.md`) is reused unchanged. 332/332 backend
 tests pass (267 prior + 65 new); 82/82 frontend tests pass.
 
-## Phase 10 — RPS Strategy Visualization
+## Phase 10 — RPS Strategy Visualization *(completed, scope corrected)*
 Build the payoff-matrix view and mixed-strategy/probability
 visualization (equilibrium probabilities, expected value, exploitability).
 
-**Acceptance criteria:**
-- Payoff matrix and equilibrium probabilities render correctly for the
-  standard game and update if a biased/adaptive AI strategy is selected.
+**Note on scope:** the detailed Phase 10 instructions actually
+received scoped this phase to a full **interactive Game Theory Lab**
+with six sections (payoff matrix, mixed strategy explorer, expected
+payoff calculator, best response lab, Nash equilibrium explorer,
+exploitability demonstration), driven by live user-adjustable
+probabilities rather than a fixed set of preset strategies — broader
+and more interactive than this document's earlier one-line framing,
+and explicitly excluding human-vs-human play (Phase 9's scope) and the
+sequential Alpha-Beta variant (Phase 11's scope).
+
+**Acceptance criteria (as actually specified for this phase):**
+- Payoff matrix renders correctly and updates its displayed values
+  when the Player A/Player B perspective is switched, without
+  changing the underlying convention. — Met:
+  `InteractivePayoffMatrix`, backed by `rpsEngine.ts`'s exported
+  `PAYOFF_MATRIX`.
+- Mixed-strategy probabilities, expected payoff, best response, and
+  exploitability all update immediately from live user input, and are
+  mathematically correct (cross-checked against the Python engine's
+  actual output, not just hand-derived separately). — Met:
+  `lib/rpsGameTheory.ts`, verified in `rpsGameTheory.test.ts` §"Python/
+  TypeScript parity" and `docs/RPS_STRATEGY_VISUALIZATION.md` §1.1.
+- Invalid probability distributions are never silently normalized;
+  validation feedback is always visible. — Met:
+  `useRpsStrategyLab.ts`/`ProbabilityInputGroup`, never auto-correcting
+  a change, with an explicit opt-in "Normalize to sum 1" action as the
+  only rescaling path.
+
+**Implementation details:** see `docs/RPS_STRATEGY_VISUALIZATION.md`.
+No new backend game-theory mathematics, FastAPI endpoints, database
+persistence, authentication, human-vs-human mode, or Phase 11+
+functionality was introduced; Phase 8's math engine
+(`docs/RPS_STRATEGY_ENGINE.md`) remains the sole source of truth and
+is unchanged, and Phase 9's gameplay engine and match logic are
+untouched. 332/332 backend tests pass (unchanged this phase); 164/164
+frontend tests pass (82 prior + 82 new).
 
 ## Phase 11 — Sequential RPS Alpha-Beta Educational Demonstration
 Implement the separately labeled sequential-reveal variant of RPS as a

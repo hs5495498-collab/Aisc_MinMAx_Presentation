@@ -20,8 +20,23 @@ competition:
 Neither game has been implemented yet. This repository currently
 contains architecture, UI/UX design, and planning documentation only.
 
-**Status: Phase 9 — RPS Interactive Gameplay (human vs. AI) complete.**
-A full human-vs-AI Rock Paper Scissors match is now playable end to
+**Status: Phase 10 — RPS Strategy Visualization and Interactive Game
+Theory Lab complete.** The RPS Strategy Matrix page
+(`/labs/rps-matrix`) is now a six-tab interactive lab — Payoff Matrix,
+Mixed Strategy Explorer, Expected Payoff Calculator, Best Response
+Lab, Nash Equilibrium Explorer, and Exploitability Demonstration — all
+computed live from player-adjustable probabilities via
+`frontend/src/lib/rpsGameTheory.ts`, a verified TypeScript mirror of
+Phase 8's `analysis.py`/`equilibrium.py` (parity cross-checked against
+the real Python engine's output, not just hand-derived). Invalid
+probability distributions are never silently normalized; an explicit
+"Normalize to sum 1" action is the only rescaling path. See
+[docs/RPS_STRATEGY_VISUALIZATION.md](./docs/RPS_STRATEGY_VISUALIZATION.md).
+No new backend game-theory mathematics or FastAPI layer was
+introduced; Phase 8 remains the sole mathematical source of truth.
+
+**Phase 9 — RPS Interactive Gameplay (human vs. AI) complete.**
+A full human-vs-AI Rock Paper Scissors match is playable end to
 end on the dashboard theme: best-of-3/5/7/custom match configuration,
 four selectable AI strategies (Nash/uniform, random, custom mixed,
 biased demonstration), round-by-round reveal, scoreboard, match
@@ -32,8 +47,7 @@ after the player's move is locked, never exposed before
 session.py}`, mirrored by `frontend/src/lib/rpsEngine.ts` as a
 clearly-labeled frontend demo pending Phase 12's API). See
 [docs/RPS_GAMEPLAY.md](./docs/RPS_GAMEPLAY.md). Human-vs-human play
-and the payoff-matrix/probability visualization remain Phase 10's
-scope; no FastAPI layer exists yet.
+remains out of scope; no FastAPI layer exists yet.
 
 **Phase 8 — RPS Strategy Engine complete.** A pure-Python,
 game-theory-only engine (`backend/app/games/rock_paper_scissors/`)
@@ -105,6 +119,7 @@ variant that *is*.
 | [docs/GAME_THEORY_DESIGN.md](./docs/GAME_THEORY_DESIGN.md) | Payoff matrix, Nash equilibrium, exploitability |
 | [docs/RPS_STRATEGY_ENGINE.md](./docs/RPS_STRATEGY_ENGINE.md) | As-built RPS engine: mixed strategies, equilibrium derivation, exploitability |
 | [docs/RPS_GAMEPLAY.md](./docs/RPS_GAMEPLAY.md) | As-built RPS gameplay: match engine, AI strategies, simultaneous-action fairness, frontend |
+| [docs/RPS_STRATEGY_VISUALIZATION.md](./docs/RPS_STRATEGY_VISUALIZATION.md) | As-built RPS Strategy Lab: payoff matrix, mixed strategy, expected payoff, best response, equilibrium, exploitability |
 | [docs/API_SPECIFICATION.md](./docs/API_SPECIFICATION.md) | FastAPI REST contract for both games |
 | [docs/UI_UX_DESIGN.md](./docs/UI_UX_DESIGN.md) | Master design system: tokens, navigation, dual visual theme |
 | [docs/PAGE_WIREFRAMES.md](./docs/PAGE_WIREFRAMES.md) | Wireframes and layout hierarchy for all 14 pages |

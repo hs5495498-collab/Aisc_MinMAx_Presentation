@@ -1,90 +1,63 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Grid3x3, Shuffle, Calculator, Target, Scale, ShieldAlert } from 'lucide-react'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { SectionSubNav } from '@/components/navigation/SectionSubNav'
-import { Card } from '@/components/ui/Card'
-import { PayoffMatrixGrid } from '@/components/rps/PayoffMatrixGrid'
-import { ProbabilityBar } from '@/components/rps/ProbabilityBar'
+import { Badge } from '@/components/ui/Badge'
+import { Tabs } from '@/components/ui/Tabs'
 import { EducationalVariantBanner } from '@/components/feedback/EducationalVariantBanner'
 import { GraphCanvas } from '@/components/graph/GraphCanvas'
+import { InteractivePayoffMatrix } from '@/components/rps/strategy-lab/InteractivePayoffMatrix'
+import { MixedStrategyExplorer } from '@/components/rps/strategy-lab/MixedStrategyExplorer'
+import { ExpectedPayoffCalculator } from '@/components/rps/strategy-lab/ExpectedPayoffCalculator'
+import { BestResponseLab } from '@/components/rps/strategy-lab/BestResponseLab'
+import { NashEquilibriumExplorer } from '@/components/rps/strategy-lab/NashEquilibriumExplorer'
+import { ExploitabilityDemonstration } from '@/components/rps/strategy-lab/ExploitabilityDemonstration'
+import { useRpsStrategyLab } from '@/hooks/useRpsStrategyLab'
 import { labRoutes } from '@/lib/routes'
 
-type Strategy = 'nash_uniform' | 'biased_fixed' | 'pattern_adaptive'
+const TABS = [
+  { id: 'payoff-matrix', label: 'Payoff Matrix', icon: <Grid3x3 size={14} /> },
+  { id: 'mixed-strategy', label: 'Mixed Strategy Explorer', icon: <Shuffle size={14} /> },
+  { id: 'expected-payoff', label: 'Expected Payoff Calculator', icon: <Calculator size={14} /> },
+  { id: 'best-response', label: 'Best Response Lab', icon: <Target size={14} /> },
+  { id: 'nash-equilibrium', label: 'Nash Equilibrium Explorer', icon: <Scale size={14} /> },
+  { id: 'exploitability', label: 'Exploitability Demonstration', icon: <ShieldAlert size={14} /> },
+] as const
 
-const distributions: Record<Strategy, { rock: number; paper: number; scissors: number }> = {
-  nash_uniform: { rock: 1 / 3, paper: 1 / 3, scissors: 1 / 3 },
-  biased_fixed: { rock: 0.5, paper: 0.3, scissors: 0.2 },
-  pattern_adaptive: { rock: 0.3, paper: 0.4, scissors: 0.3 },
-}
+type TabId = (typeof TABS)[number]['id']
 
 export function RPSMatrixPage() {
   const route = labRoutes[3]
-  const [strategy, setStrategy] = useState<Strategy>('nash_uniform')
-  const dist = distributions[strategy]
-  const isEquilibrium = strategy === 'nash_uniform'
+  const [activeTab, setActiveTab] = useState<TabId>('payoff-matrix')
+  const strategyLab = useRpsStrategyLab()
 
   return (
-    <PageContainer route={route}>
+    <PageContainer
+      route={route}
+      actions={
+        <Badge tone="warning">
+          Frontend demo — mirrors the real Python game-theory engine, not yet connected via an API (Phase 12)
+        </Badge>
+      }
+    >
       <SectionSubNav items={labRoutes} />
 
-      <div className="mb-6 grid gap-4 lg:grid-cols-2">
-        <Card title="Payoff Matrix">
-          <PayoffMatrixGrid />
-          <p className="mt-3 text-xs text-text-tertiary">
-            Hover or focus a cell for its outcome. This is the mathematically correct, static
-            zero-sum payoff matrix for standard Rock Paper Scissors — see docs/GAME_THEORY_DESIGN.md.
-          </p>
-        </Card>
-
-        <Card title="Mixed-Strategy Distribution">
-          <label className="mb-3 flex items-center gap-2 text-sm text-text-secondary">
-            Strategy
-            <select
-              value={strategy}
-              onChange={(e) => setStrategy(e.target.value as Strategy)}
-              className="rounded-md border border-surface-card-border bg-black/20 px-2 py-1.5 text-sm text-text-primary"
-            >
-              <option value="nash_uniform">Nash (uniform)</option>
-              <option value="biased_fixed">Biased (fixed)</option>
-              <option value="pattern_adaptive">Pattern-adaptive</option>
-            </select>
-          </label>
-          <div className="space-y-3">
-            <ProbabilityBar label="Rock" probability={dist.rock} />
-            <ProbabilityBar label="Paper" probability={dist.paper} />
-            <ProbabilityBar label="Scissors" probability={dist.scissors} />
-          </div>
-          <p className="mt-4 text-sm text-text-secondary">
-            Expected value against this distribution:{' '}
-            <strong className="text-text-primary">{isEquilibrium ? '0 (fair game)' : 'non-zero — exploitable'}</strong>
-          </p>
-          {!isEquilibrium && (
-            <p className="mt-1 text-xs text-state-warning">
-              This distribution deviates from 1/3-1/3-1/3, so it is no longer the Nash equilibrium
-              and can be exploited by a well-chosen counter-strategy.
-            </p>
-          )}
-        </Card>
-      </div>
-
-      <Card title="Why 1/3, 1/3, 1/3?" className="mb-6">
-        <p className="text-sm text-text-secondary">
-          The payoff matrix is invariant under the cyclic relabeling Rock → Paper → Scissors → Rock,
-          so any equilibrium must be too — which forces equal probability on all three options. At{' '}
-          <code className="rounded-sm bg-black/30 px-1.5 py-0.5 font-mono text-xs">(1/3, 1/3, 1/3)</code>,
-          every pure response yields the same expected payoff (0), so neither player can profit by
-          deviating. Full derivation in the project's{' '}
-          <span className="font-mono text-xs text-text-tertiary">docs/GAME_THEORY_DESIGN.md</span> and
-          the <Link className="text-accent-cyan hover:underline" to="/learn/game-theory">RPS Game Theory tutorial</Link>.
-        </p>
-      </Card>
+      <Tabs items={TABS} activeId={activeTab} onChange={(id) => setActiveTab(id as TabId)}>
+        {activeTab === 'payoff-matrix' && <InteractivePayoffMatrix />}
+        {activeTab === 'mixed-strategy' && <MixedStrategyExplorer {...strategyLab} />}
+        {activeTab === 'expected-payoff' && <ExpectedPayoffCalculator {...strategyLab} />}
+        {activeTab === 'best-response' && <BestResponseLab {...strategyLab} />}
+        {activeTab === 'nash-equilibrium' && <NashEquilibriumExplorer />}
+        {activeTab === 'exploitability' && <ExploitabilityDemonstration />}
+      </Tabs>
 
       <EducationalVariantBanner>
         <p className="mb-3">
           Standard simultaneous Rock Paper Scissors is <strong>not</strong> solved by alternating-turn
           Alpha-Beta — there is no second mover with information to search over. This panel instead
-          demonstrates Alpha-Beta mechanics on an artificial variant where Player 1's choice is
-          revealed first, turning it into a small sequential game purely for teaching purposes.
+          demonstrates Alpha-Beta mechanics on an artificial variant where Player 1&apos;s choice is
+          revealed first, turning it into a small sequential game purely for teaching purposes. Building
+          that variant out is Phase 11&apos;s scope, not this page&apos;s.
         </p>
         <GraphCanvas illustrative />
       </EducationalVariantBanner>

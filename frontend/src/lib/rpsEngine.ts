@@ -56,8 +56,10 @@ export const DEFAULT_TOLERANCE = 1e-9
 
 export const DEFAULT_BIASED_DEMO_PROBABILITIES: ProbabilityTriple = { ROCK: 0.7, PAPER: 0.2, SCISSORS: 0.1 }
 
-/** Player A's payoff — identical table to `payoff.py::PAYOFF_MATRIX`. */
-const PAYOFF_MATRIX: Record<Action, Record<Action, number>> = {
+/** Player A's payoff — identical table to `payoff.py::PAYOFF_MATRIX`.
+ * Exported so other frontend modules (e.g. `rpsGameTheory.ts`) reuse
+ * this exact table rather than re-typing the same literal. */
+export const PAYOFF_MATRIX: Record<Action, Record<Action, number>> = {
   ROCK: { ROCK: 0, PAPER: -1, SCISSORS: 1 },
   PAPER: { ROCK: 1, PAPER: 0, SCISSORS: -1 },
   SCISSORS: { ROCK: -1, PAPER: 1, SCISSORS: 0 },
