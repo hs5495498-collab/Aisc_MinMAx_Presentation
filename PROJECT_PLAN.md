@@ -78,13 +78,22 @@ engine, or backend code was introduced — Tic-Tac-Toe and Rock Paper
 Scissors use a clearly-labeled random demo opponent only, and all
 sample statistics/history are labeled as demo data.
 
-## Phase 4 — Tic-Tac-Toe Game Engine
+## Phase 4 — Tic-Tac-Toe Game Engine *(completed)*
 Implement pure-Python Tic-Tac-Toe rules: board state, move validation,
 win/draw detection, move history, undo/restart.
 
 **Acceptance criteria:**
 - Engine passes unit tests for all terminal states and illegal moves.
+  — Met: 56/56 Pytest tests pass, covering all 8 winning lines for
+  both X and O, two distinct draw layouts, and every exception type.
 - Human vs. human play works end-to-end through the engine (no AI).
+  — Met: `TicTacToeGame.make_move()` alternates turns with no AI
+  involved; verified via the test suite and a manual demo script.
+
+**Implementation details:** see `backend/README.md` and
+`docs/TIC_TAC_TOE_ENGINE.md`. No Minimax, Alpha-Beta, FastAPI, or
+database code was introduced — pure rules only, importable directly
+from Python (`from app.games.tic_tac_toe import TicTacToeGame`).
 
 ## Phase 5 — Minimax Implementation
 Implement baseline Minimax search for Tic-Tac-Toe.

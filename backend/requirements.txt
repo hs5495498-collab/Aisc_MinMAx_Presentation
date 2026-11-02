@@ -1,0 +1,4 @@
+# The Tic-Tac-Toe engine itself (app/games/tic_tac_toe) is pure
+# standard-library Python and has zero runtime dependencies.
+# pytest is required only to run the test suite.
+pytest>=8.0,<9

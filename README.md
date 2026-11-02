@@ -20,15 +20,17 @@ competition:
 Neither game has been implemented yet. This repository currently
 contains architecture, UI/UX design, and planning documentation only.
 
-**Status: Phase 3 — React Frontend Foundation complete.** A working
-React + Vite + TypeScript + Tailwind CSS application (`frontend/`)
-implements all 14 pages with the two permanent visual themes, full
-navigation, and responsive layouts. No game engine, algorithms, or
-backend yet — Tic-Tac-Toe and Rock Paper Scissors use a clearly
-labeled random demo opponent only. See
-[frontend/README.md](./frontend/README.md) and
+**Status: Phase 4 — Tic-Tac-Toe Game Engine complete.** A pure-Python,
+rules-only Tic-Tac-Toe engine now exists in `backend/` (board state,
+move validation, win/draw detection, history, undo/restart — no AI,
+no HTTP, no database yet). The Phase 3 frontend
+(`frontend/`) still uses its own clearly-labeled random demo opponent;
+the two are not yet wired together. See
+[backend/README.md](./backend/README.md) and
+[docs/TIC_TAC_TOE_ENGINE.md](./docs/TIC_TAC_TOE_ENGINE.md) for the
+engine, [frontend/README.md](./frontend/README.md) and
 [docs/FRONTEND_ARCHITECTURE.md](./docs/FRONTEND_ARCHITECTURE.md) for
-details, and [PROJECT_PLAN.md](./PROJECT_PLAN.md) for the roadmap.
+the frontend, and [PROJECT_PLAN.md](./PROJECT_PLAN.md) for the roadmap.
 
 ## Games
 
@@ -70,6 +72,7 @@ variant that *is*.
 | [docs/DESIGN_DECISIONS.md](./docs/DESIGN_DECISIONS.md) | Key design decisions, rationale, and trade-offs |
 | [docs/TESTING_STRATEGY.md](./docs/TESTING_STRATEGY.md) | Pytest / Vitest coverage plan |
 | [docs/FRONTEND_ARCHITECTURE.md](./docs/FRONTEND_ARCHITECTURE.md) | As-built frontend structure, dependencies, and theme implementation |
+| [docs/TIC_TAC_TOE_ENGINE.md](./docs/TIC_TAC_TOE_ENGINE.md) | As-built Tic-Tac-Toe engine: state model, rules, exceptions, testing |
 
 ## Navigation Map (Planned)
 
