@@ -18,7 +18,14 @@ competition:
   player can see *why* no single deterministic move is ever optimal.
 
 Neither game has been implemented yet. This repository currently
-contains architecture, design, and planning documentation only.
+contains architecture, UI/UX design, and planning documentation only.
+
+**Status: Phase 2 — UI/UX Design complete.** Wireframes, interaction
+flows, responsive behavior, a component inventory, and design-decision
+rationale exist for all 14 planned pages. See
+[docs/PAGE_WIREFRAMES.md](./docs/PAGE_WIREFRAMES.md) for the full
+page-by-page design and [PROJECT_PLAN.md](./PROJECT_PLAN.md) for the
+roadmap.
 
 ## Games
 
@@ -52,7 +59,12 @@ variant that *is*.
 | [docs/ROCK_PAPER_SCISSORS_DESIGN.md](./docs/ROCK_PAPER_SCISSORS_DESIGN.md) | RPS gameplay, strategies, data model |
 | [docs/GAME_THEORY_DESIGN.md](./docs/GAME_THEORY_DESIGN.md) | Payoff matrix, Nash equilibrium, exploitability |
 | [docs/API_SPECIFICATION.md](./docs/API_SPECIFICATION.md) | FastAPI REST contract for both games |
-| [docs/UI_UX_DESIGN.md](./docs/UI_UX_DESIGN.md) | Navigation map, dual visual theme system |
+| [docs/UI_UX_DESIGN.md](./docs/UI_UX_DESIGN.md) | Master design system: tokens, navigation, dual visual theme |
+| [docs/PAGE_WIREFRAMES.md](./docs/PAGE_WIREFRAMES.md) | Wireframes and layout hierarchy for all 14 pages |
+| [docs/INTERACTION_FLOWS.md](./docs/INTERACTION_FLOWS.md) | User journeys and element-level interaction states |
+| [docs/RESPONSIVE_DESIGN.md](./docs/RESPONSIVE_DESIGN.md) | Breakpoints and desktop/tablet/mobile behavior |
+| [docs/COMPONENT_INVENTORY.md](./docs/COMPONENT_INVENTORY.md) | Proposed reusable components and responsibilities |
+| [docs/DESIGN_DECISIONS.md](./docs/DESIGN_DECISIONS.md) | Key design decisions, rationale, and trade-offs |
 | [docs/TESTING_STRATEGY.md](./docs/TESTING_STRATEGY.md) | Pytest / Vitest coverage plan |
 
 ## Navigation Map (Planned)

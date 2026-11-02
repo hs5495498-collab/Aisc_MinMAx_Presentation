@@ -40,16 +40,24 @@ GitHub repository.
   on `main`, with no application code committed.
 - No prior repositories modified or deleted.
 
-## Phase 2 — UI/UX Design
+## Phase 2 — UI/UX Design *(completed)*
 Finalize wireframes/mockups for both visual themes (graph theme,
 dashboard theme) across every page in the navigation map.
 
 **Acceptance criteria:**
 - Mockups or detailed specs exist for Dashboard, both game pages, all
   four Algorithm Labs, all three Insights pages, and all four Learning
-  pages.
+  pages. — Met: see `docs/PAGE_WIREFRAMES.md` (all 14 pages).
 - Theme usage (graph vs. dashboard) is consistent with
-  `docs/UI_UX_DESIGN.md`.
+  `docs/UI_UX_DESIGN.md`. — Met: token-level design system, route/theme
+  table, and per-page theme labels are consistent across
+  `UI_UX_DESIGN.md` and `PAGE_WIREFRAMES.md`.
+
+**Design-only deliverables added this phase:** `docs/UI_UX_DESIGN.md`
+(master design system), `docs/PAGE_WIREFRAMES.md`,
+`docs/INTERACTION_FLOWS.md`, `docs/RESPONSIVE_DESIGN.md`,
+`docs/COMPONENT_INVENTORY.md`, `docs/DESIGN_DECISIONS.md`. No
+application code, components, or dependencies were introduced.
 
 ## Phase 3 — React Frontend Foundation
 Scaffold the React + Vite + Tailwind CSS + Framer Motion application
